@@ -10,7 +10,7 @@
             </div>
         <?php endif; ?>
         <div class="card-header">
-            <h5 style="color: #405e48;">Update List
+            <h5 style="color: #405e48;"> <?php echo $pageTitle;?>
                 <a href="./index.php" class="btn btn-outline-primary float-end">Back To Lists</a>
             </h5>
         </div>
