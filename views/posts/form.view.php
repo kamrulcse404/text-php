@@ -5,9 +5,6 @@ $description = $postData['details'] ?? '';
 $author = $postData['author'] ?? '';
 
 // var_dump($title);
-
-
-
 ?>
 
 
@@ -29,6 +26,14 @@ $author = $postData['author'] ?? '';
         <input type="file" name="image" class="form-control" required>
     </div>
     <div class="float-end">
-        <button type="submit" class="btn btn-outline-success">Update</button>
+        <button type="submit" class="btn btn-outline-success">
+            <?php 
+            if ($action === 'edit') {
+                echo "Update";
+            }else {
+                echo "Add List";
+            }
+            ?>
+        </button>
     </div>
 </form>

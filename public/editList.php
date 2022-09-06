@@ -1,7 +1,21 @@
 <?php
 
+require_once __DIR__ .'./../config/database.php';
 $errors = array();
-require_once './database.php';
+$action = 'edit';
+$pageTitle = 'Edit List';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    // var_dump($id);
+    // die('id not found');
+    $postQuery = "SELECT * FROM todo_list WHERE id = :id";
+
+    $stmt = $pdo->prepare($postQuery);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+    $postData = $stmt->fetch(PDO::FETCH_ASSOC); 
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -28,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!is_dir('images')) {
                 mkdir('images');
             }
-
+        
             if (!is_dir('images/todos')) {
                 mkdir('images/todos');
             }
-
-            $imagePath = 'images/todos/' . uniqid() . $image['name'];
+            
+            $imagePath = 'images/todos/'. uniqid() .$image['name'];
             move_uploaded_file($image['tmp_name'], $imagePath);
         }
 
@@ -53,40 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<?php require_once './partials/header.php'; ?>
+<?php
 
-<!-- Navbar -->
-<?php require_once './partials/nav.php'; ?>
-<!-- Navbar End -->
+ob_start();
+require_once __DIR__ . './../views/posts/editList.view.php';
 
-<!-- Main -->
-<div class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-8 mt-1">
-            <div class="card mt-1">
-                <?php if ($errors) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        <ul>
-                            <?php foreach ($errors as $error) : ?>
-                                <li><?php echo $error; ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                <?php endif; ?>
-                <div class="card-header">
-                    <h5 style="color: #405e48;">Add List
-                        <a href="./index.php" class="btn btn-outline-primary float-end">Back To Lists</a>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <?php require_once './form.php'; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Main End -->
+$content = ob_get_clean();
+require_once __DIR__ . './../views/layout.view.php';
 
-<!-- Footer -->
-<?php require_once './partials/footer.php'; ?>
-<!-- Footer End-->
+?>
