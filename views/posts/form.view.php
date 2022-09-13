@@ -1,21 +1,27 @@
 <?php
 
+$id = $postData['id'] ?? '';
 $title = $postData['title'] ?? '';
 $description = $postData['details'] ?? '';
 $author = $postData['author'] ?? '';
 
-// var_dump($title);
 ?>
 
 
 <form method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <input type="text" name="id" hidden value="<?php echo $id; ?>" class="form-control">
+    </div>
+
+
     <div class="mb-3">
         <label style="color: #405e48;">Title</label>
         <input type="text" name="title" placeholder="Enter Title" value="<?php echo $title; ?>" class="form-control" required>
     </div>
     <div class="mb-3">
         <label style="color: #405e48;">List Description</label>
-        <textarea type="text" name="description" value="<?php echo $description; ?>" placeholder="Description" class="form-control" required></textarea>
+        <textarea type="text" name="description" placeholder="Description" class="form-control" required><?php echo $description; ?></textarea>
     </div>
     <div class="mb-3">
         <label style="color: #405e48;">Author</label>
@@ -27,10 +33,10 @@ $author = $postData['author'] ?? '';
     </div>
     <div class="float-end">
         <button type="submit" class="btn btn-outline-success">
-            <?php 
+            <?php
             if ($action === 'edit') {
                 echo "Update";
-            }else {
+            } else {
                 echo "Add List";
             }
             ?>

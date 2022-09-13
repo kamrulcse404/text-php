@@ -1,68 +1,78 @@
 <?php
 
-require_once __DIR__ .'./../config/database.php';
+require_once __DIR__ .'./../app/Controllers/ListsController.php';
+
+use App\Controllers\ListsControllers;
+
 $errors = array();
 $action = 'edit';
 $pageTitle = 'Edit List';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-    $id = $_GET['id'];
-    // var_dump($id);
-    // die('id not found');
-    $postQuery = "SELECT * FROM todo_list WHERE id = :id";
 
-    $stmt = $pdo->prepare($postQuery);
-    $stmt->bindValue(':id', $id);
-    $stmt->execute();
-    $postData = $stmt->fetch(PDO::FETCH_ASSOC); 
+    $editInstance = new ListsControllers();
+    $postData = $editInstance->edit($_GET);
+
+    // $id = $_GET['id'];
+    // $postQuery = "SELECT * FROM todo_list WHERE id = :id";
+
+    // $stmt = $pdo->prepare($postQuery);
+    // $stmt->bindValue(':id', $id);
+    // $stmt->execute();
+    // $postData = $stmt->fetch(PDO::FETCH_ASSOC); 
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    date_default_timezone_set('Asia/Dhaka');
+    $editInstance = new ListsControllers();
+    $editInstance->updateList($_POST);
 
-    $title = $_POST['title'] ?? null;
-    $description = $_POST['description'] ?? null;
-    $author = $_POST['author'] ?? null;
-    $image = $_FILES['image'];
-    $imagePath = '';
-    if (!$title) {
-        $errors['title'] = 'Title is required';
-    }
-    if (!$description) {
-        $errors['description'] = 'Description is required';
-    }
-    if (!$author) {
-        $errors['author'] = 'Author name is required';
-    }
+    // date_default_timezone_set('Asia/Dhaka');
 
-    if (!$errors) {
+    // $id = $_POST['id'] ?? null;
+    // $title = $_POST['title'] ?? null;
+    // $description = $_POST['description'] ?? null;
+    // $author = $_POST['author'] ?? null;
+    // $image = $_FILES['image'];
+    // $imagePath = '';
+    // if (!$title) {
+    //     $errors['title'] = 'Title is required';
+    // }
+    // if (!$description) {
+    //     $errors['description'] = 'Description is required';
+    // }
+    // if (!$author) {
+    //     $errors['author'] = 'Author name is required';
+    // }
 
-        if ($image) {
-            if (!is_dir('images')) {
-                mkdir('images');
-            }
+    // if (!$errors) {
+
+    //     if ($image) {
+    //         if (!is_dir('images')) {
+    //             mkdir('images');
+    //         }
         
-            if (!is_dir('images/todos')) {
-                mkdir('images/todos');
-            }
+    //         if (!is_dir('images/todos')) {
+    //             mkdir('images/todos');
+    //         }
             
-            $imagePath = 'images/todos/'. uniqid() .$image['name'];
-            move_uploaded_file($image['tmp_name'], $imagePath);
-        }
+    //         $imagePath = 'images/todos/'. uniqid() .$image['name'];
+    //         move_uploaded_file($image['tmp_name'], $imagePath);
+    //     }
 
-        $query = "INSERT INTO todo_list(title, details, author, created_at, image_path) VALUES(:title, :details, :author, :created_at, :image_path)";
+    //     $query = "UPDATE todo_list SET title = :title, details = :details, author = :author, created_at = :created_at, image_path = :image_path WHERE id = :id";
 
-        $stmt = $pdo->prepare($query);
-        $stmt->bindValue(':title', $title);
-        $stmt->bindValue(':details', $description);
-        $stmt->bindValue(':author', $author);
-        $stmt->bindValue(':created_at', date('Y-m-d H:i:s'));
-        $stmt->bindValue(':image_path', $imagePath);
-        $stmt->execute();
+    //     $stmt = $pdo->prepare($query);
+    //     $stmt->bindValue(':title', $title);
+    //     $stmt->bindValue(':details', $description);
+    //     $stmt->bindValue(':author', $author);
+    //     $stmt->bindValue(':created_at', date('Y-m-d H:i:s'));
+    //     $stmt->bindValue(':image_path', $imagePath);
+    //     $stmt->bindValue(':id', $id);
+    //     $stmt->execute();
 
-        header('Location: index.php');
-    }
+    //     header('Location: index.php');
+    // }
 }
 
 ?>

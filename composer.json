@@ -1,0 +1,17 @@
+{
+    "name": "kamrul/todo-app",
+    "description": "A simple todo app",
+    "type": "project",
+    "authors": [
+        {
+            "name": "kamrulcse404",
+            "email": "kamrul.h01960@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}

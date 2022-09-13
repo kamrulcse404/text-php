@@ -1,8 +1,6 @@
 <?php
 
-namespace app\Helpers;
-
-// var_dump('Kamrul');
+namespace App\Helpers;
 
 use PDO;
 

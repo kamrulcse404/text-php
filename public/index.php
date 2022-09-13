@@ -1,29 +1,15 @@
 <?php
-// var_dump('Index');
-// require_once __DIR__.'./../config/database.php';
-// require_once __DIR__ . '/../app/Helpers/Database.php';
-require_once __DIR__ . '/../app/Controllers/ListsController.php';
 
-use app\Controllers\ListsControllers;
-// use app\Helpers\Database;
+// require_once __DIR__ . '/../app/Controllers/ListsController.php';
+require_once __DIR__ . "./../vendor/autoload.php";
 
-// $pdo = Database::getInstance();
-
+use App\Controllers\ListsControllers;
 
 $pageTitle = "Todo Blog";
 $heading = 'All Lists';
 
 $listsInstance = new ListsControllers();
 $lists = $listsInstance->index();
-
-// try {
-//   $query = "SELECT * FROM todo_list ORDER BY id ASC";
-//   $stmt = $pdo->prepare($query);
-//   $stmt->execute();
-//   $lists = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// } catch (\Throwable $th) {
-//   die("Can not query to DB");
-// }
 
 ?>
 

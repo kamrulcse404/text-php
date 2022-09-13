@@ -29,10 +29,10 @@
                             <td><?php echo $list['created_at']; ?></td>
                             <td><img class="w-25" src="<?php echo 'assets/' . $list['image_path']; ?>" alt="Todo Image"></td>
                             <td>
-                                <a href="editList.php?<?php echo $list['id']; ?>" class="btn btn-outline-primary">Edit</a>
+                                <a href="editList.php?id=<?= $list['id']; ?>"  class="btn btn-outline-primary">Edit</a>
                             </td>
                             <td>
-                                <a href="" class="btn btn-outline-danger">Delete</a>
+                                <a href="deleteList.php?id=<?= $list['id']; ?>" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
