@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__ .'./../app/Controllers/ListsController.php';
+// require_once __DIR__ .'./../app/Controllers/ListsController.php';
+require_once __DIR__ . './../vendor/autoload.php';
 
-use App\Controllers\ListsControllers;
+use App\Controllers\ListsController;
 
 $errors = array();
 $action = 'edit';
@@ -10,7 +11,7 @@ $pageTitle = 'Edit List';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 
-    $editInstance = new ListsControllers();
+    $editInstance = new ListsController();
     $postData = $editInstance->edit($_GET);
 
     // $id = $_GET['id'];
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $editInstance = new ListsControllers();
+    $editInstance = new ListsController();
     $editInstance->updateList($_POST);
 
     // date_default_timezone_set('Asia/Dhaka');

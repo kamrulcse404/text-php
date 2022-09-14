@@ -1,14 +1,13 @@
 <?php
 
 // require_once __DIR__ . '/../app/Controllers/ListsController.php';
-require_once __DIR__ . "./../vendor/autoload.php";
-
-use App\Controllers\ListsControllers;
+require_once __DIR__ . './../vendor/autoload.php';
+use App\Controllers\ListsController;
 
 $pageTitle = "Todo Blog";
 $heading = 'All Lists';
 
-$listsInstance = new ListsControllers();
+$listsInstance = new ListsController();
 $lists = $listsInstance->index();
 
 ?>

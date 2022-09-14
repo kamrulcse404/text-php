@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . './../app/Controllers/ListsController.php';
-use App\Controllers\ListsControllers;
+// require_once __DIR__ . './../app/Controllers/ListsController.php';
+require_once __DIR__ . './../vendor/autoload.php';
+use App\Controllers\ListsController;
 
 $errors = array();
 $action = 'create';
@@ -11,7 +12,7 @@ $heading = 'Add List';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $createInstance = new ListsControllers();
+    $createInstance = new ListsController();
     $createInstance->store($_POST);
 }
 

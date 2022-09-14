@@ -17,19 +17,19 @@ $author = $postData['author'] ?? '';
 
     <div class="mb-3">
         <label style="color: #405e48;">Title</label>
-        <input type="text" name="title" placeholder="Enter Title" value="<?php echo $title; ?>" class="form-control" required>
+        <input type="text" name="title" placeholder="Enter Title" value="<?php echo $title; ?>" class="form-control" >
     </div>
     <div class="mb-3">
         <label style="color: #405e48;">List Description</label>
-        <textarea type="text" name="description" placeholder="Description" class="form-control" required><?php echo $description; ?></textarea>
+        <textarea type="text" name="description" placeholder="Description" class="form-control" ><?php echo $description; ?></textarea>
     </div>
     <div class="mb-3">
         <label style="color: #405e48;">Author</label>
-        <input type="text" name="author" value="<?php echo $author; ?>" placeholder="Author Name" class="form-control" required>
+        <input type="text" name="author" value="<?php echo $author; ?>" placeholder="Author Name" class="form-control">
     </div>
     <div class="mb-3">
         <label style="color: #405e48;">Image</label>
-        <input type="file" name="image" class="form-control" required>
+        <input type="file" name="image" class="form-control">
     </div>
     <div class="float-end">
         <button type="submit" class="btn btn-outline-success">

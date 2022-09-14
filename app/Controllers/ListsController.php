@@ -8,7 +8,7 @@ namespace App\Controllers;
 use PDO;
 use App\Helpers\Database;
 
-class ListsControllers
+class ListsController
 {
     protected $pdo;
 
@@ -32,6 +32,7 @@ class ListsControllers
     public function edit($response)
     {
         $id = $response['id'];
+        // var_dump($id);
         $postQuery = "SELECT * FROM todo_list WHERE id = :id";
 
         $stmt = $this->pdo->prepare($postQuery);
@@ -63,21 +64,19 @@ class ListsControllers
 
         if (!$errors) {
 
-            // if ($image) {
-            //     if (!is_dir('images')) {
-            //         mkdir('images');
-            //     }
+            if ($image) {
+                if (!is_dir('images')) {
+                    mkdir('images');
+                }
 
-            //     if (!is_dir('images/todos')) {
-            //         mkdir('images/todos');
-            //     }
+                if (!is_dir('images/todos')) {
+                    mkdir('images/todos');
+                }
 
-            //     $imagePath = 'images/todos/' . uniqid() . $image['name'];
-            //     move_uploaded_file($image['tmp_name'], $imagePath);
-            // }
+                $imagePath = 'images/todos/' . uniqid() . $image['name'];
+                move_uploaded_file($image['tmp_name'], $imagePath);
+            }
 
-            $imagePath = 'images/todos/' . uniqid() . $image['name'];
-            move_uploaded_file($image['tmp_name'], $imagePath);
 
             // var_dump($title);
             // echo "<br>";
@@ -153,6 +152,10 @@ class ListsControllers
             $stmt->execute();
 
             header('Location: index.php');
+            exit;
         }
+        // var_dump($errors);exit;
+        header('Location: createList.php');
+
     }
 }
